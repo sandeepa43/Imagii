@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "MyImageUploadApp",
-    "slug": "MyImageUploadApp",
+    "slug": "myimageuploadapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,16 +12,27 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "useNextBuilds": true,
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sandeepa43.MyImageUploadApp"
     },
     "android": {
+      "useNextBuilds": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.sandeepa43.MyImageUploadApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "firebaseIosApiKey": "AIzaSyCP5ooO4IPvG4_qYvhgykb6gaiq1YPkgt8",
+      "firebaseAndroidApiKey": "AIzaSyA6cuXL9W_EaHtDSU4YlR5wWBCllz78fSw",
+      "eas": {
+        "projectId": "b7238077-94db-4fbe-8779-74a6ac6fbb45"
+      }
     }
   }
 }
