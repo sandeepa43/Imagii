@@ -115,6 +115,7 @@ const CameraComponent = ({}) => {
           ToastAndroid.show("Successfully Uploaded!", ToastAndroid.SHORT);
         },
         (error) => {
+          ToastAndroid.show(error?.message, ToastAndroid.SHORT);
           Alert.alert("Error uploading image:", error.message);
         },
         () => {
@@ -124,6 +125,7 @@ const CameraComponent = ({}) => {
         }
       );
     } catch (err) {
+      ToastAndroid.show(err?.message, ToastAndroid.SHORT);
       console.log(err);
     } finally {
       setIsUploading(false);
@@ -147,55 +149,68 @@ const CameraComponent = ({}) => {
             ref={cameraRef}
           />
         )}
-        <View style={styles.titleContainer}>
-          <Text style={styles.welcomeText}>Welcome Back!</Text>
-          <Text>Upload Images by click on Add Icon or Take New Pictures!</Text>
-        </View>
         {!openCamera && (
-          <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
-            <View
-              style={{ flexDirection: "row", flexWrap: "wrap", width: "100%" }}
-            >
-              {photoList?.length && !openCamera
-                ? photoList.map((item) => (
-                    <View
-                      style={{
-                        alignItems: "center",
-                        width: "44%",
-                        height: 155,
-                        marginHorizontal: "3%",
-                        display: "flex",
-                        marginVertical: 15,
-                        borderRadius: 10,
-                        backgroundColor: "#f9f9f9",
-                        shadowColor: "#000",
-                        shadowOffset: { width: 0, height: 2 },
-                        shadowOpacity: 0.25,
-                        shadowRadius: 3.84,
-                        elevation: 5,
-                      }}
-                    >
-                      <Image
-                        source={{ uri: `file://${item}` }}
-                        style={{
-                          height: 155,
-                          width: "100%",
-                          borderRadius: 10,
-                        }}
-                      />
-                    </View>
-                  ))
-                : null}
-              <TouchableOpacity style={styles.addContainer} onPress={pickImage}>
-                <Image
-                  source={{
-                    uri: "https://png.pngtree.com/png-vector/20220616/ourmid/pngtree-blue-plus-concept-icon-on-white-background-png-image_5097450.png",
-                  }}
-                  style={styles.addIcon}
-                />
-              </TouchableOpacity>
+          <>
+            <View style={styles.titleContainer}>
+              <Text style={styles.welcomeText}>Welcome Back!</Text>
+              <Text>
+                Upload Images by click on Add Icon or Take New Pictures!
+              </Text>
             </View>
-          </ScrollView>
+
+            <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  width: "100%",
+                }}
+              >
+                {photoList?.length && !openCamera
+                  ? photoList.map((item, index) => (
+                      <View
+                        key={index}
+                        style={{
+                          alignItems: "center",
+                          width: "44%",
+                          height: 155,
+                          marginHorizontal: "3%",
+                          display: "flex",
+                          marginVertical: 15,
+                          borderRadius: 10,
+                          backgroundColor: "#f9f9f9",
+                          shadowColor: "#000",
+                          shadowOffset: { width: 0, height: 2 },
+                          shadowOpacity: 0.25,
+                          shadowRadius: 3.84,
+                          elevation: 5,
+                        }}
+                      >
+                        <Image
+                          source={{ uri: `file://${item}` }}
+                          style={{
+                            height: 155,
+                            width: "100%",
+                            borderRadius: 10,
+                          }}
+                        />
+                      </View>
+                    ))
+                  : null}
+                <TouchableOpacity
+                  style={styles.addContainer}
+                  onPress={pickImage}
+                >
+                  <Image
+                    source={{
+                      uri: "https://png.pngtree.com/png-vector/20220616/ourmid/pngtree-blue-plus-concept-icon-on-white-background-png-image_5097450.png",
+                    }}
+                    style={styles.addIcon}
+                  />
+                </TouchableOpacity>
+              </View>
+            </ScrollView>
+          </>
         )}
         <View style={styles.footer}>
           {isUploading ? (
@@ -228,7 +243,6 @@ const CameraComponent = ({}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: "center",
     width: "100%",
   },
   addContainer: {
@@ -264,7 +278,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
   titleContainer: {
-    marginHorizontal: 10,
+    margin: 10,
   },
   footer: {
     flexDirection: "row",
