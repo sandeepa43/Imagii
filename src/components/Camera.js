@@ -39,7 +39,7 @@ const CameraComponent = ({ }) => {
 
         if (!hasPermission) {
             const permissionGranted = await requestCameraPermission();
-            console.log(hasPermission, "permissionGranted");
+          
             if (permissionGranted !== "granted") {
                 Alert.alert("Camera permission is required to take a picture.");
                 return;
